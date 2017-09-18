@@ -1,2 +1,2 @@
 # L3vi.github.io
-A repo for my projects.
+## A repository for my projects.
