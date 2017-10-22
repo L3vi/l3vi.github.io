@@ -31,22 +31,24 @@ h1, h2, h3, h4, h5, h6 {
 
 /*-- Header --*/
 
-#page-header {
-    background-color: skyblue;
+#page_header {
     display: flex;
+    background-color: skyblue;
+    flex-wrap: wrap;
 }
 
 #logo {
     font-size: 5.5em
 }
 
-.website-name {
+.website_name {
     font-size: 2em;
     font-weight: 600;
     align-self: center;
 }
 
 /*-- Main --*/
+
 main {
     display: flex;
     flex-flow: column nowrap;
@@ -56,13 +58,18 @@ main {
     background-size: cover;
 }
 
+.city {
+    color:white;
+}
+
 .overview {
     background-color: rgba(200,200,200,.6);
     margin: .2em auto;
     border: 1px solid;
     border-radius: 40px;
     text-align: center;
-    padding: 15px;
+    padding: 0px 1.5em;
+    order: 1;
 }
 
 .current_conditions {
@@ -70,7 +77,17 @@ main {
     margin: .2em auto;
     border: 1px solid;
     border-radius: 40px;
-    padding: 5px;
+    padding: 0px 1em;
+    order: 2;
+}
+
+.hourly {
+    background-color: rgba(200,200,200,.6);
+    margin: .2em auto;
+    border: 1px solid;
+    border-radius: 40px;
+    padding: 0px 1em;
+    order: 3;
 }
 
 #current_temp {
@@ -79,9 +96,12 @@ main {
 
 /*-- Footer --*/
 footer {
-    margin-bottom: 75px;
+    margin-bottom: 50px;
     background-color: skyblue;
+    padding: 5px;
 }
+
+/*-- Navigation Bar --*/
 
 nav {
     position: fixed;
@@ -120,3 +140,64 @@ nav ul {
     padding: 0;
 }
 
+/*Desktop Version*/
+@media only screen and (min-width: 830px) {
+    nav {
+        display: flex;
+        position: relative;
+        border-top: 3px solid black;
+        border-bottom: 3px solid black;
+        width: 100%;
+    }
+    
+    nav li {
+        margin: 0px 20px;
+        font-size: 1.5em
+    }
+    
+    main {
+        flex-flow: row wrap;
+        background-size: cover;
+        justify-content: space-around;
+        align-items: baseline;
+        height:100%;
+    }
+    
+    .city {
+        width: 100%;
+    }
+    
+    .current_conditions {
+        order: 1;
+        height: 500px;
+        margin: 20px 0px;
+
+    }
+    
+    .overview {
+        order: 2;
+        height: 500px;
+        margin: 20px 0px;
+        
+    }
+    
+    .overview p::before {
+        content: "Today's High and Low";
+        display:block;
+    }
+    
+    .hourly {
+        order: 3;
+        margin: 20px 0px;
+
+    }
+    
+    .hourly ul {
+        text-align: right;
+        list-style: none;
+    }
+    
+    footer {
+        margin: 0;
+    }
+}
