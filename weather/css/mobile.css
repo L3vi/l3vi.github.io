@@ -38,7 +38,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #logo {
-    font-size: 5.5em
+    font-size: 5.5em;
+    padding: 0.2em 0.2em 0em;
 }
 
 .website_name {
@@ -81,6 +82,16 @@ main {
     order: 2;
 }
 
+.summary {
+    display: flex;
+    flex-flow: row wrap=;
+    align-items: center;
+}
+
+.current_emoji {
+    font-size: 2em;
+}
+
 .hourly {
     background-color: rgba(200,200,200,.6);
     margin: .2em auto;
@@ -88,6 +99,7 @@ main {
     border-radius: 40px;
     padding: 0px 1em;
     order: 3;
+    display: none;
 }
 
 #current_temp {
@@ -140,7 +152,7 @@ nav ul {
     padding: 0;
 }
 
-/*Desktop Version*/
+/*-- Desktop Version --*/
 @media only screen and (min-width: 830px) {
     nav {
         display: flex;
@@ -164,36 +176,40 @@ nav ul {
     }
     
     .city {
-        width: 100%;
+        flex-basis: 100%;
     }
     
     .current_conditions {
         order: 1;
-        height: 500px;
+/*        height: 500px;*/
         margin: 20px 0px;
 
     }
     
     .overview {
         order: 2;
-        height: 500px;
+/*        height: 500px;*/
         margin: 20px 0px;
         
     }
     
     .overview p::before {
         content: "Today's High and Low";
-        display:block;
+        display: block;
     }
     
     .hourly {
+        width: 300px;
+        display: flex;
+        flex-flow: row wrap;
         order: 3;
         margin: 20px 0px;
-
+        height: 400px;
+        overflow-y: auto;
     }
     
     .hourly ul {
-        text-align: right;
+        align-self: center;
         list-style: none;
     }
     
