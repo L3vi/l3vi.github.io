@@ -84,7 +84,7 @@ main {
 
 .summary {
     display: flex;
-    flex-flow: row wrap=;
+    flex-flow: row wrap;
     align-items: center;
 }
 
