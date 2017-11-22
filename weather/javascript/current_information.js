@@ -42,6 +42,7 @@ $(function () {
                 
                 // Inserting information into document
                 $(".city").html(location);
+                $("title").prepend(location + " | ");
                 $("#current_temp").html(temp_f);
                 $("#current_high").html(temp_high_f);
                 $("#current_low").html(temp_low_f);
