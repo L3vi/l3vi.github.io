@@ -1,7 +1,7 @@
 $('#query').keyup(function () {
     let value = $(this).val();
     let srch_value = new RegExp(value, "i");
-    $.getJSON("http://autocomplete.wunderground.com/aq?query=" + value + "&cb=?", function (data) {
+    $.getJSON("https://autocomplete.wunderground.com/aq?query=" + value + "&cb=?", function (data) {
         console.log(data);
         let output = '<ol>';
         $.each(data.RESULTS, function (key, val) {
