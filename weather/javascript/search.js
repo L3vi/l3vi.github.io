@@ -22,7 +22,7 @@ $('#query').keyup(function () {
 function getData(input) {
     // Get the data from the wunderground API
     $.ajax({
-        url: "//api.wunderground.com/api/436f9d65036b8775/geolookup/conditions/q/" +
+        url: "https://api.wunderground.com/api/436f9d65036b8775/geolookup/conditions/q/" +
             input + ".json",
         dataType: "jsonp",
         success: function (data) {
