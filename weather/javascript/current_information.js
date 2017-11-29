@@ -27,19 +27,19 @@ $(function () {
                 let city = data['location']['city'];
                 let state = data['location']['state'];
                 let location = city + ", " + state;
-                
+
                 // Temperature Information
                 let temp_f = parseInt(data['current_observation']['temp_f']);
                 let temp_high_f = parseInt(data['forecast']['simpleforecast']['forecastday']['0']['high']['fahrenheit']);
                 let temp_low_f = parseInt(data['forecast']['simpleforecast']['forecastday']['0']['low']['fahrenheit']);
-                
+
                 // Current Conditions Information
                 let current_wind = data['current_observation']['wind_string'];
                 let current_precip = data['current_observation']['precip_today_in'];
-                
+
                 let summary = data['current_observation']['weather'];
                 let image = data['current_observation']['icon_url'];
-                
+
                 // Inserting information into document
                 $(".city").html(location);
                 $("title").prepend(location + " | ");
