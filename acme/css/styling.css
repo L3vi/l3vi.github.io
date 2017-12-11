@@ -11,7 +11,7 @@ html,body {
 }
 
 body {
-    background-image: url("/images/site/background.jpg");
+    background-image: url("images/site/background.jpg");
     background-size: cover;
     margin: 8px;
 }
@@ -57,7 +57,7 @@ main {
 }
 
 .feature {
-    background: url("/images/site/feature.jpg");
+    background: url("images/site/feature.jpg");
     background-size: cover;
     color: #ffffff;
     width: 100%;
