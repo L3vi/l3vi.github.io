@@ -57,7 +57,7 @@ main {
 }
 
 .feature {
-    background: url("images/site/feature.jpg");
+    background: url("/acme/images/site/feature.jpg");
     background-size: cover;
     color: #ffffff;
     width: 100%;
