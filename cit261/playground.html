@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <title>Playground</title>
+
+</head>
+
+<body>
+    <h1>Calculator</h1>
+    <section>
+        <input type="text" id="num1">
+        <br/>
+        <input type="text" id="num2">
+        <br/>
+        <button onclick="add()">+</button>
+        <button onclick="sub()">-</button>
+        <button onclick+"div()">&#247;</button>
+        <span>Result: <span id="result"></span></span>
+    </section>
+</body>
+<style>
+</style>
+<script>
+    
+    
+    
+    function add() {
+        const num1 = document.getElementById('num1').value;
+        const num2 = document.getElementById('num2').value;
+        const result = document.getElementById('result');
+        result.innerHTML = parseFloat(num1) + parseFloat(num2);
+    }
+    
+    function sub() {
+        const num1 = document.getElementById('num1').value;
+        const num2 = document.getElementById('num2').value;
+        const result = document.getElementById('result');
+        result.innerHTML = parseFloat(num1) - parseFloat(num2);
+    }
+    
+    function div() {
+        const num1 = document.getElementById('num1').value;
+        const num2 = document.getElementById('num2').value;
+        const result = document.getElementById('result');
+        result.innerHTML = parseFloat(num1) / parseFloat(num2);
+    }
+    
+</script>
+
+</html>
