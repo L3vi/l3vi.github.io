@@ -15,6 +15,7 @@
     width: 100%;
     height: var(--buttonWidth);
     font-size: calc(var(--buttonWidth)*.8);
+    
 }
 
 .calcButtons {
@@ -29,5 +30,5 @@
 }
 
 button.span {
-    flex: 1 0 calc(var(--buttonWidth) * 1.4);
+    flex: 1 0 calc(var(--buttonWidth) * 1);
 }

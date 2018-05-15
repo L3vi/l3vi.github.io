@@ -9,11 +9,17 @@ const calculator = {
         this.io.value = '';
     },
     remember: function() {
-        if(this.mSet) {
-            this.io.value = this.memory;
-            this.mSet = true;
-        } else {
+        if(this.mSet == false) {
             this.memory = this.io.value;
+            this.mSet = true;
+        } else if(this.mSet == true) {
+            this.io.value = this.memory;
+            this.mSet = false;
+        }
+    },
+    forget: function() {
+        if(this.mSet) {
+            this.memory = 0;
             this.mSet = false;
         }
     },
@@ -38,8 +44,11 @@ const calculator = {
         console.log(button.innerHTML);
         let inputBox = this.io;
         switch (button.innerHTML) {
-            case 'M':
+            case 'MR':
                 this.remember();
+                break;
+            case 'MC':
+                this.forget();
                 break;
             case 'C':
                 this.clear();
