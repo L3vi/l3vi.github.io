@@ -1,4 +1,6 @@
 #navList li {
     list-style-type: none;
-    padding: inherit;
+    padding: 1em;
+    background-color: darkgray;
+    width: 10em;
 }

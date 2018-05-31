@@ -1,0 +1,16 @@
+#objects ul {
+    display: flex;
+    flex-direction: rows;
+}
+
+.heroes {
+    padding: 1em;
+}
+
+.villains {
+    padding: 1em;
+}
+
+#objects ul li{
+    list-style: none;
+}
