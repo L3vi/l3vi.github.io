@@ -1,3 +1,14 @@
 html, body {
     height: 100%;
+    font-size: 150px;
+    text-align: center;
+}
+
+button {
+    font-size: 1em;
+    background-color: green;
+    border-radius: 50px;
+    padding: 0.1em;
+    width: 5em;
+    color: white;
 }
