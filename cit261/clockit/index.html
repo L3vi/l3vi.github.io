@@ -1,20 +1,22 @@
 <!doctype html>
 <html>
     <head>
-        <title>Title of Your Page</title>
+        <title>Clock It!</title>
         
         <!--Reminder. Rel is for relationship.-->
         <link href="style.css" type="text/css" rel="stylesheet">
     </head>
     <body>
         <section>
+            <p><span id="weeklyTime">0</span><span> Hours</span></p>
+            <br/>
             <p id="time">00:00:00</p>
             <button id="toggle" onclick="toggleClock()">Clock In</button>
         </section>
         <hr/>
         <section>
-            <ul id="timeList">
-            </ul>
+            <table id="timeList">
+            </table>
         </section>
     </body>
     <footer>
