@@ -1,34 +1,12 @@
+import Time from './time.js';
+
 var isPressed = false;
 var date1 = Date();
 var date2 = Date();
 var current = Date();
 const timeSheet = [];
-
-
-class Time {
-
-    constructor(startDate, endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.interval = (endDate - startDate);
-        //        this.interval = 45296000;
-        this.milliseconds = (this.interval) % 1000;
-        this.seconds = (this.interval / 1000) % 60;
-        this.minutes = ((this.interval / 1000) / 60) % 60;
-        this.hours = (((this.interval / 1000) / 60) / 60) % 60;
-    }
-
-    display() {
-        console.log(((this.hours < 10) ? "0" + parseInt(this.hours) : parseInt(this.hours)) + ":" +
-            ((this.minutes < 10) ? "0" + parseInt(this.minutes) : parseInt(this.minutes)) + ":" +
-            ((this.seconds < 10) ? "0" + parseInt(this.seconds) : parseInt(this.seconds)));
-
-        return (((this.hours < 10) ? "0" + parseInt(this.hours) : parseInt(this.hours)) + ":" +
-            ((this.minutes < 10) ? "0" + parseInt(this.minutes) : parseInt(this.minutes)) + ":" +
-            ((this.seconds < 10) ? "0" + parseInt(this.seconds) : parseInt(this.seconds)));
-    }
-
-}
+var weeklyTime = 0;
+document.getElementById('toggle').addEventListener("click", toggleClock)
 
 function toggleClock() {
     if (isPressed == false) {
@@ -65,24 +43,25 @@ function displayTimeClockedIn() {
 
 function updateTimeSheet(entry) {
 
-    var weeklyTime = 0;
+    
     let timeTable = document.getElementById('timeList');
 
-    var row = timeTable.insertRow(timeSheet.indexOf(entry));
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
+    let row = timeTable.insertRow(timeSheet.indexOf(entry));
+    let cell1 = row.insertCell(0);
+    let cell2 = row.insertCell(1);
 
     cell1.innerHTML = entry.startDate.toDateString();
-//    Decides whether to display seconds, minutes, or hours
+    //    Decides whether to display seconds, minutes, or hours
+    let seconds = Math.floor(entry.seconds);
+    let minutes = Math.floor(entry.minutes);
     if (entry.minutes < 1) {
-        cell2.innerHTML = ((Math.floor(entry.seconds) == 1) ? ((Math.floor(entry.seconds)) + " Second") : ((Math.floor(entry.seconds)) + " Seconds"));
+        cell2.innerHTML = (entry.seconds == 1) ? (seconds + " Second") : (seconds + " Seconds");
     } else if (entry.hours < 1) {
-        cell2.innerHTML = ((entry.minutes > 2) ? ((Math.floor(entry.minutes)) + " Minutes") : ((Math.floor(entry.minutes)) + " Minute"));
+        cell2.innerHTML = (entry.minutes > 2) ? (minutes + " Minutes") : (minutes + " Minute");
     } else {
-        cell2.innerHTML = (Math.floor(entry.hours * 100) / 100) + " Hours";
+        cell2.innerHTML = (Math.floor(entry.hours * 10) / 10) + " Hours";
     }
     
-
     weeklyTime += Math.round(entry.hours * 10) / 10
     document.getElementById('weeklyTime').innerHTML = weeklyTime;
 }
