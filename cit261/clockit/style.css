@@ -11,6 +11,7 @@ button {
     padding: 0.1em;
     width: 5em;
     color: white;
+    outline: none;
 }
 
 #time {
@@ -18,23 +19,79 @@ button {
     margin: 0em;
 }
 
-#timeList {
+/*
+#timeSheet {
     font-size: 0.4em;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    color: skyblue;
+    color: darkblue;
 }
 
-#timeList tr {
+#timeSheet tr {
     width: 100%;
 }
 
-#timeList tr td {
+#timeSheet tr td {
     width: 40%;
     height: 2em;
 }
 
-#timeList tr:nth-child(even) {
+#timeSheet tr:nth-child(even) {
     background-color: lightgray;
+}
+*/
+
+#timeSheet {
+    padding-left: 0;
+    margin: 0;
+}
+
+#entry {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 0.75em;
+    
+    overflow: hidden;
+}
+
+#entry:nth-child(even) .entryCell {
+/*    background-color: lightgray;*/
+}
+
+#entry:nth-child(odd) .entryCell {
+/*    border: 1px solid darkblue;*/
+}
+
+.entryCell {
+    background-color: lightgray;
+    width: 49%;
+    margin-bottom: 0.3em;
+    padding: 0.3em 0em 0.3em 0em;
+    border: 1px solid white;
+
+    text-align: center;
+    font-size: 0.4em;
+    color: darkblue;
+}
+
+.entryCell:nth-child(1) {
+    border-radius: 10px 0px 0px 10px;
+}
+
+.entryCell:nth-child(2) {
+    border-radius: 0px 10px 10px 0px;
+}
+
+.entryCell:nth-child(3) {
+    width: 100%;
+    border-radius: 0px 0px 10px 10px;
+}
+
+
+.hide {
+    display: none;
 }

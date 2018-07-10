@@ -1,25 +1,33 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Clock It!</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--Reminder. Rel is for relationship.-->
-        <link href="style.css" type="text/css" rel="stylesheet">
-    </head>
-    <body>
-        <section>
-            <p><span id="weeklyTime">0</span><span> Hours</span></p>
-            <br/>
-            <p id="time">00:00:00</p>
-            <button id="toggle">Clock In</button>
-        </section>
-        <hr/>
-        <section>
-            <table id="timeList">
-            </table>
-        </section>
-    </body>
-    <footer>
-        <script type="module" src="script.js" defer></script>
-    </footer>
+
+<head>
+    <title>Clock It!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Reminder. Rel is for relationship.-->
+    <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+    <section>
+        <p><span id="weeklyTime">0</span><span> Hours</span></p>
+        <br/>
+        <p id="time">00:00:00</p>
+        <button id="toggle">Clock In</button>
+    </section>
+    <hr/>
+    <section>
+<!--        <table id="timeSheet"></table>-->
+        <ul id="timeSheet"></ul>
+    </section>
+
+    <section id="entry">
+
+    </section>
+</body>
+<footer>
+    <script type="module" src="script.js" defer></script>
+</footer>
+
 </html>
