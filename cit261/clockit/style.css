@@ -19,28 +19,8 @@ button {
     margin: 0em;
 }
 
-/*
-#timeSheet {
-    font-size: 0.4em;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    color: darkblue;
-}
 
-#timeSheet tr {
-    width: 100%;
-}
-
-#timeSheet tr td {
-    width: 40%;
-    height: 2em;
-}
-
-#timeSheet tr:nth-child(even) {
-    background-color: lightgray;
-}
-*/
+/*--- Formatting for the timeSheet   ---*/
 
 #timeSheet {
     padding-left: 0;
@@ -89,9 +69,4 @@ button {
 .entryCell:nth-child(3) {
     width: 100%;
     border-radius: 0px 0px 10px 10px;
-}
-
-
-.hide {
-    display: none;
 }

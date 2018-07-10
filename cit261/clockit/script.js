@@ -9,7 +9,6 @@ const timeSheet = [];
 let myJSON = JSON;
 
 var entry = document.getElementById("entry");
-var isShown = false;
 
 if (document.getElementById('toggle') != null) {
     document.getElementById('toggle').addEventListener("click", toggleClock);
@@ -87,19 +86,17 @@ function updateTimeSheet(entry) {
 
 
 function showEntry() {
-    if (isShown == false) {
+    if (this.scrollHeight > this.clientHeight) {
         // Shows the overflow
         this.style.overflow = "visible";
         this.style.height = "auto";
         this.style.paddingBottom = "0.5em";
-        isShown = true;
         console.log("shown");
-    } else if (isShown == true) {
+    } else if (this.scrollHeight == this.clientHeight) {
         // Hides the overflow
         this.style.overflow = "hidden";
         this.style.height = "0.75em";
         this.style.paddingBottom = "0em";
-        isShown = false;
         console.log("hidden");
     };
 }
