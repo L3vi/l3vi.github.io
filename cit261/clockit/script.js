@@ -52,7 +52,7 @@ function updateTimeSheet(entry) {
     cell3.setAttribute("class", "entryCell");
 
     // If they press a time entry, do this function
-    row.addEventListener("click", showEntry);
+    row.addEventListener("touchend", showEntry);
 
     var date = document.createTextNode(entry.startDate.toDateString());
     var time;
