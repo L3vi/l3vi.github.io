@@ -10,7 +10,7 @@ let myJSON = JSON;
 
 
 if (document.getElementById('toggle') != null) {
-    document.getElementById('toggle').addEventListener("click", toggleClock);
+    document.getElementById('toggle').addEventListener("touchend", toggleClock);
 }
 
 function toggleClock() {
