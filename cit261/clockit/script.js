@@ -8,7 +8,6 @@ var current = Date();
 const timeSheet = [];
 let myJSON = JSON;
 
-var entry = document.getElementById("entry");
 
 if (document.getElementById('toggle') != null) {
     document.getElementById('toggle').addEventListener("click", toggleClock);
@@ -30,37 +29,52 @@ function toggleClock() {
 
         timeSheet.push(timeEntry);
         updateTimeSheet(timeEntry);
-        
+
         localStorage.setItem("timeSheet", myJSON.stringify(timeSheet));
-        
+
         document.getElementById('toggle').innerHTML = "Clock In";
         document.getElementById('toggle').style.backgroundColor = "green";
     }
 }
 
 function updateTimeSheet(entry) {
-    
+
     let timeSheet = document.getElementById('timeSheet');
-    
-//    Working on adding list items to an unordered list
+
+    // Creating the time entries
     let row = document.createElement("li");
     var cell1 = document.createElement("span");
     var cell2 = document.createElement("span");
     var cell3 = document.createElement("span");
-    row.setAttribute("id", "entry");
+    row.setAttribute("class", "entry");
     cell1.setAttribute("class", "entryCell");
     cell2.setAttribute("class", "entryCell");
     cell3.setAttribute("class", "entryCell");
+
+    // If they press a time entry, do this function
     row.addEventListener("click", showEntry);
-    
+
     var date = document.createTextNode(entry.startDate.toDateString());
     var time;
-    var range = document.createTextNode("10:00 AM - 6:00 PM");
-    
-    //    Decides whether to display seconds, minutes, or hours
+
+    // Creates an input box and fills it with the start date
+    var start = document.createElement("input");
+    start.type = "time";
+    start.value = entry.startDate.getHours() + ":" + entry.startDate.getMinutes();
+
+    // String placed between start and end dates
+    var separator = document.createTextNode("to ");
+
+    // Creates an input box and fills it with the end date
+    var end = document.createElement("input");
+    end.type = "time";
+    end.value = entry.endDate.getHours() + ":" + entry.endDate.getMinutes();
+
+
+    // Decides whether to display seconds, minutes, or hours
     let seconds = Math.floor(entry.seconds);
     let minutes = Math.floor(entry.minutes);
-    
+
     if (entry.minutes < 1) {
         time = (parseInt(entry.seconds) == 1) ? (seconds + " Second") : (seconds + " Seconds");
     } else if (entry.hours < 1) {
@@ -68,16 +82,18 @@ function updateTimeSheet(entry) {
     } else if (entry.hours >= 1) {
         time = (Math.floor(entry.hours * 10) / 10) + " Hours";
     }
-    
+
     cell1.appendChild(date);
     cell2.appendChild(document.createTextNode(time));
-    cell3.appendChild(range);
-    
+    cell3.appendChild(start);
+    cell3.appendChild(separator);
+    cell3.appendChild(end);
+
     row.appendChild(cell1);
     row.appendChild(cell2);
     row.appendChild(cell3);
     timeSheet.appendChild(row);
-    
+
 
     weeklyTime += Math.round(entry.hours * 10) / 10
     document.getElementById('weeklyTime').innerHTML = weeklyTime;
@@ -86,19 +102,10 @@ function updateTimeSheet(entry) {
 
 
 function showEntry() {
-    if (this.scrollHeight > this.clientHeight) {
-        // Shows the overflow
-        this.style.overflow = "visible";
-        this.style.height = "auto";
-        this.style.paddingBottom = "0.5em";
-        console.log("shown");
-    } else if (this.scrollHeight == this.clientHeight) {
-        // Hides the overflow
-        this.style.overflow = "hidden";
-        this.style.height = "0.75em";
-        this.style.paddingBottom = "0em";
-        console.log("hidden");
-    };
+    if (document.activeElement.tagName != "INPUT") {
+        this.classList.toggle("entryDisplay");
+    }
+    
 }
 
 // Calls the timeClocked function every second to update the web page's timer.

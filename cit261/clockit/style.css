@@ -27,15 +27,35 @@ button {
     margin: 0;
 }
 
-#entry {
+.entry {
     display: flex;
     list-style: none;
     justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
+    margin-bottom: 0.2em;
+    
+    /*Gets toggled*/
     height: 0.75em;
     
     overflow: hidden;
+    transition: height 0.5s ease;
+}
+
+.entryDisplay {
+    height: 1.7em;
+}
+
+.entryDisplay span {
+    background-color: darkgray;
+}
+
+.entry input[type="time"] {
+    background-color: darkgray;
+    border: 0;
+    font-family: "times";
+    font-size: 1em;
+    color: blue;
 }
 
 #entry:nth-child(even) .entryCell {
