@@ -4,7 +4,7 @@ body {
     text-align: center;
 }
 
-button {
+#toggle {
     font-size: 1em;
     background-color: green;
     border-radius: 50px;
@@ -43,11 +43,19 @@ button {
 }
 
 .entryDisplay {
-    height: 1.7em;
+    height: 2.4em;
 }
 
 .entryDisplay span {
     background-color: darkgray;
+}
+
+.entryDisplay span:nth-child(1) {
+    border-radius: 10px 0px 0px 0px;
+}
+
+.entryDisplay span:nth-child(2) {
+    border-radius: 0px 10px 0px 0px;
 }
 
 .entry input[type="time"] {
@@ -58,12 +66,12 @@ button {
     color: blue;
 }
 
-#entry:nth-child(even) .entryCell {
-/*    background-color: lightgray;*/
-}
-
-#entry:nth-child(odd) .entryCell {
-/*    border: 1px solid darkblue;*/
+.entry button {
+    margin: 0em 1em 0em 1em;
+    background-color: white;
+    border-radius: 1em;
+    width: 4em;
+    font-size: 0.8em;
 }
 
 .entryCell {
@@ -75,6 +83,7 @@ button {
 
     text-align: center;
     font-size: 0.4em;
+    height: 1em;
     color: darkblue;
 }
 
@@ -88,5 +97,6 @@ button {
 
 .entryCell:nth-child(3) {
     width: 100%;
+    height: 3em;
     border-radius: 0px 0px 10px 10px;
 }

@@ -1,5 +1,5 @@
 class Time {
-
+    
     constructor(startDate, endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
@@ -9,6 +9,35 @@ class Time {
         this.seconds = (this.interval / 1000) % 60;
         this.minutes = ((this.interval / 1000) / 60) % 60;
         this.hours = (((this.interval / 1000) / 60) / 60) % 60;
+    }
+    
+    update(startDate, endDate) {
+        this.setInterval(startDate, endDate);
+        this.setMilliseconds(this.interval);
+        this.setSeconds(this.interval);
+        this.setMinutes(this.interval);
+        this.setHours(this.interval);
+    }
+    
+    setInterval(startDate, endDate) {
+        // TODO: Validation
+        this.interval = endDate - startDate;
+    }
+    
+    setMilliseconds(interval) {
+        this.milliseconds = interval % 1000;
+    }
+    
+    setSeconds(interval) {
+        this.seconds = (interval / 1000) % 60;
+    }
+    
+    setMinutes(interval) {
+        this.minutes = ((interval / 1000) / 60) % 60;
+    }
+    
+    setHours(interval) {
+        this.hours = (((interval / 1000) / 60) / 60) % 60;
     }
 
     display() {
@@ -21,10 +50,6 @@ class Time {
                 ((this.seconds < 10) ? "0" + parseInt(this.seconds) : parseInt(this.seconds)));
     }
     
-    test() {
-        console.log("Hello World:)");
-    }
-
 }
 
 export default Time;
