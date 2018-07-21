@@ -144,7 +144,7 @@ function populateEntry(entry, emptyEntry) {
     cell3.appendChild(document.createElement("br"));
     
 
-    cancelButton.addEventListener("click", function (e) {
+    cancelButton.addEventListener("touchend", function (e) {
         start.value =
             ((entry.startDate.getHours() < 10 ? '0' : '') +
              entry.startDate.getHours()) + ":" +
@@ -157,7 +157,7 @@ function populateEntry(entry, emptyEntry) {
              entry.endDate.getMinutes());
     });
 
-    saveButton.addEventListener("click", function (e) {
+    saveButton.addEventListener("touchend", function (e) {
         // Extracts hours and minutes from input value
         entry.startDate.setHours(start.value.slice(0, 2));
         entry.startDate.setMinutes(start.value.slice(3, 5));
@@ -177,7 +177,7 @@ function updateEntry(entry, time, cell) {
     var minutes = Math.floor(entry.minutes);
     var hours = Math.floor(entry.hours);
 
-    if (entry.minutes < 1) {
+    if (entry.minutes < 1 && entry.hours < 1) {
         time = (seconds + " Second" + ((parseInt(entry.seconds) == 1) ? '' : 's'));
     } else if (entry.hours < 1) {
         time = (minutes + " Minute" +
@@ -196,6 +196,8 @@ function showEntry() {
     // as long as the user is not tapping on the time input, toggle the display of the time entry
     if (document.activeElement.tagName != "INPUT") {
         this.classList.toggle("entryDisplay");
+    } else {
+        console.log("Input clicked");
     };
 }
 
