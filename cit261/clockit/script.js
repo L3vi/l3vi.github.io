@@ -52,8 +52,7 @@ function updateTimeSheet(entry) {
     populateEntry(entry, emptyEntry);
     
     // Updates the weekly amount at the top
-    weeklyTime += Math.round(entry.hours * 10) / 10
-    document.getElementById('weeklyTime').innerHTML = weeklyTime;
+    updateTotalHours();
 }
 
 function createEntry(entryNumber) {
@@ -83,6 +82,10 @@ function createEntry(entryNumber) {
     cancelButton.innerHTML = "Cancel";
     var saveButton = document.createElement("button");
     saveButton.innerHTML = "Save";
+    saveButton.style.backgroundColor = "green";
+    var deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
+    deleteButton.style.backgroundColor = "red";
 
     row.appendChild(cell1);
 
@@ -91,6 +94,7 @@ function createEntry(entryNumber) {
     cell3.appendChild(start);
     cell3.appendChild(separator);
     cell3.appendChild(end);
+    cell3.appendChild(deleteButton);
     cell3.appendChild(cancelButton);
     cell3.appendChild(saveButton);
     row.appendChild(cell3);
@@ -104,9 +108,10 @@ function populateEntry(entry, emptyEntry) {
     var cell3 = emptyEntry.getElementsByClassName("entryCell")[2];
     var start = cell3.getElementsByTagName("input")[0];
     var end = cell3.getElementsByTagName("input")[1];
-    var cancelButton = cell3.getElementsByTagName("button")[0];
-    var saveButton = cell3.getElementsByTagName("button")[1];
-
+    var deleteButton = cell3.getElementsByTagName("button")[0];
+    var cancelButton = cell3.getElementsByTagName("button")[1];
+    var saveButton = cell3.getElementsByTagName("button")[2];
+    
     var date = entry.startDate.toDateString();
     var time = "0";
     
@@ -143,8 +148,8 @@ function populateEntry(entry, emptyEntry) {
     
     cell3.appendChild(document.createElement("br"));
     
-
     cancelButton.addEventListener("touchend", function (e) {
+        // Resets the start/end values to what they were before the user started editing them.
         start.value =
             ((entry.startDate.getHours() < 10 ? '0' : '') +
              entry.startDate.getHours()) + ":" +
@@ -165,10 +170,20 @@ function populateEntry(entry, emptyEntry) {
         entry.endDate.setHours(end.value.slice(0, 2));
         entry.endDate.setMinutes(end.value.slice(3, 5));
         
-        console.log(entry.interval);
+        // Updates the model (actual entry object)
         entry.update(entry.startDate, entry.endDate);
+        
+        // Updates the view
         updateEntry(entry, time, cell2);
-        console.log(entry.interval);
+    });
+    
+    deleteButton.addEventListener("touchend", function (e) {
+        if (confirm("Are you sure you want to delete this entry?")) {
+            deleteEntry(entry);
+            console.log("Deleted.");     
+        } else {
+            console.log("Canceled.");
+        }
     });
 }
 
@@ -186,10 +201,27 @@ function updateEntry(entry, time, cell) {
         time = (hours + " Hour" +
                 ((entry.hours > 2) ? 's' : ''));
     }
-    
     cell.innerHTML = time;
-    weeklyTime += Math.round(entry.hours * 10) / 10
-    document.getElementById('weeklyTime').innerHTML = weeklyTime;
+    updateTotalHours();
+    
+}
+
+function updateTotalHours() {
+    weeklyTime = 0;
+    timeSheet.forEach(function(entry) {
+        weeklyTime += Math.round(entry.hours * 10) / 10
+        document.getElementById('weeklyTime').innerHTML = weeklyTime;
+    });
+}
+
+function deleteEntry(entry) {
+    var index = timeSheet.indexOf(entry);
+    // Finds the timeSheet and removes this instance of HTML form it. 
+    document.getElementById("timeSheet").removeChild(document.getElementsByClassName("entry")[index]);
+    
+    // Removes entry from timeSheet
+    timeSheet.splice(index, 1);
+    updateTotalHours();
 }
 
 function showEntry() {
