@@ -8,6 +8,38 @@ var current = Date();
 const timeSheet = [];
 let myJSON = JSON;
 
+window.addEventListener("load", function() {
+    
+    // REMOVE THIS WHEN WORKING ON LOCALSTORAGE
+//    localStorage.clear();
+    
+    if (localStorage.getItem("timeSheet") != null) {
+        myJSON.parse(localStorage.getItem("timeSheet")).forEach(function(entry) {
+            // Resets starting and ending dates to Date objects
+            var date1 = new Date(Date.parse(entry.startDate));
+            var date2 = new Date(Date.parse(entry.endDate));
+            
+            // Also recreates parsed info as a new Time object
+            let timeEntry = new Time(date1, date2);
+            
+            // Insert into current local timeSheet
+            timeSheet.push(timeEntry);
+            
+            // Create empty html entry
+            createEntry();
+            
+            // Set that entry to a variable
+            let emptyEntry = document.getElementsByClassName("entry")[timeSheet.indexOf(timeEntry)];
+            
+            // Fill that entry with data from timeEntry
+            populateEntry(timeEntry, emptyEntry);
+            
+            // Update amount of hours at the top
+            updateTotalHours();
+        });
+    } 
+});
+
 
 if (document.getElementById('toggle') != null) {
     document.getElementById('toggle').addEventListener("touchend", toggleClock);
@@ -29,9 +61,14 @@ function toggleClock() {
 
         timeSheet.push(timeEntry);
         updateTimeSheet(timeEntry);
-
+        
+        var indexString = "entry" + timeSheet.indexOf(timeEntry);
+        
+        // For tesing purposes
+        // localStorage.clear();
+        
         localStorage.setItem("timeSheet", myJSON.stringify(timeSheet));
-
+        
         document.getElementById('toggle').innerHTML = "Clock In";
         document.getElementById('toggle').style.backgroundColor = "green";
     }
@@ -118,8 +155,9 @@ function populateEntry(entry, emptyEntry) {
     var seconds = Math.floor(entry.seconds);
     var minutes = Math.floor(entry.minutes);
     var hours = Math.floor(entry.hours);
+    console.log(hours);
 
-    if (entry.minutes < 1) {
+    if (entry.minutes < 1 && entry.hours < 1) {
         time = (seconds + " Second" + ((parseInt(entry.seconds) == 1) ? '' : 's'));
     } else if (entry.hours < 1) {
         time = (minutes + " Minute" +
@@ -127,7 +165,7 @@ function populateEntry(entry, emptyEntry) {
     } else if (entry.hours >= 1) {
         time = (hours + " Hour" +
                 ((entry.hours > 2) ? 's' : ''));
-    }
+    }    
 
     cell1.innerHTML = date;
     cell2.innerHTML = time;
@@ -202,11 +240,15 @@ function updateEntry(entry, time, cell) {
                 ((entry.hours > 2) ? 's' : ''));
     }
     cell.innerHTML = time;
+    
+    // Updates JSON/local storage
+    localStorage.setItem("timeSheet", myJSON.stringify(timeSheet));
     updateTotalHours();
     
 }
 
 function updateTotalHours() {
+    // Resets hours to 0. loops through timeSheet. adds current hours up and displays them in "weeklyTime" ID.
     weeklyTime = 0;
     timeSheet.forEach(function(entry) {
         weeklyTime += Math.round(entry.hours * 10) / 10
@@ -221,6 +263,10 @@ function deleteEntry(entry) {
     
     // Removes entry from timeSheet
     timeSheet.splice(index, 1);
+    
+    // Update local storage
+    localStorage.setItem("timeSheet", myJSON.stringify(timeSheet));
+    
     updateTotalHours();
 }
 
