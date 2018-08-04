@@ -155,7 +155,6 @@ function populateEntry(entry, emptyEntry) {
     var seconds = Math.floor(entry.seconds);
     var minutes = Math.floor(entry.minutes);
     var hours = Math.floor(entry.hours);
-    console.log(hours);
 
     if (entry.minutes < 1 && entry.hours < 1) {
         time = (seconds + " Second" + ((parseInt(entry.seconds) == 1) ? '' : 's'));
