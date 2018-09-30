@@ -1,0 +1,17 @@
+#div1:hover, #div2:hover, #div3:hover {
+    font-weight: bold;
+}
+
+#div1 {
+    font-size: 45px;
+    background-color: red;
+}
+
+#div2 {
+    background-color:aqua;
+}
+
+#div3{
+    background-color: grey;
+}
+

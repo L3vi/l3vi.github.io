@@ -8,6 +8,8 @@ var current = Date();
 const timeSheet = [];
 let myJSON = JSON;
 
+
+// Loads saved time entries from local storage.
 window.addEventListener("load", function() {
     
     // REMOVE THIS WHEN WORKING ON LOCALSTORAGE
@@ -40,15 +42,17 @@ window.addEventListener("load", function() {
     } 
 });
 
-
+// As long as the toggle button exists, call the toggleClock function everytime it's pressed.
 if (document.getElementById('toggle') != null) {
     document.getElementById('toggle').addEventListener("touchend", toggleClock);
 }
 
+// Creates a start date or end date based on the state of the clock (clocked in or clocked out)
 function toggleClock() {
     if (isPressed == false) {
         console.log("Clocked in!");
         isPressed = true;
+        // Creates start date
         date1 = new Date();
 
         document.getElementById('toggle').innerHTML = "Clock Out";
@@ -56,9 +60,12 @@ function toggleClock() {
     } else {
         console.log("Clocked out!");
         isPressed = false;
+        // Creates end date
         date2 = new Date();
+        // Creates new timeEntry with the start and end dates
         let timeEntry = new Time(date1, date2);
-
+        
+        // Populates timeSheet (list of time entries) with current time entry
         timeSheet.push(timeEntry);
         updateTimeSheet(timeEntry);
         
@@ -67,6 +74,7 @@ function toggleClock() {
         // For tesing purposes
         // localStorage.clear();
         
+        // Updates localstorage with the current timeSheet
         localStorage.setItem("timeSheet", myJSON.stringify(timeSheet));
         
         document.getElementById('toggle').innerHTML = "Clock In";
@@ -92,6 +100,7 @@ function updateTimeSheet(entry) {
     updateTotalHours();
 }
 
+// Creates the HTML for the time entry
 function createEntry(entryNumber) {
     let timeSheet = document.getElementById('timeSheet');
     // Creating the time entries
@@ -139,6 +148,7 @@ function createEntry(entryNumber) {
     timeSheet.appendChild(row);
 }
 
+// Populates the HTML code with information.
 function populateEntry(entry, emptyEntry) {
     var cell1 = emptyEntry.getElementsByClassName("entryCell")[0];
     var cell2 = emptyEntry.getElementsByClassName("entryCell")[1];
