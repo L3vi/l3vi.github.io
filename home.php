@@ -12,7 +12,7 @@
 <!--    The body contains the actual bulk of the content.-->
 
 <body>
-    <?php 
+    <?php
     requires('header.php');
     ?>
 
