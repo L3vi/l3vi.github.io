@@ -1,6 +1,10 @@
 #navList li {
     list-style-type: none;
     padding: 1em;
-    background-color: darkgray;
+    background-color: lightblue;
     width: 10em;
+}
+
+#navList li:hover {
+    background-color: lightskyblue;
 }
