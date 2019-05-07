@@ -4,7 +4,7 @@ export class Contact {
     public email: string;
     public phone: string;
     public imageURL: string;
-    public group = [];
+    public group: Contact[];
 
     constructor(contactId: number, name: string, email: string, phone: string, imageURL: string, group) {
         this.contactId = contactId;
