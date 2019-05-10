@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'cms-root',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cms';
+  @Input() selectedTab: String = "documents";
+
+  switchView(selectedTab: String) {
+    console.log(selectedTab);
+    this.selectedTab = selectedTab;
+  }
 }

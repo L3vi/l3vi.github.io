@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Contact } from './contact.model';
 
 @Component({
   selector: 'cms-contacts',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  contactName = "Levi Stum";
+  @Input() selectedContact: Contact;
 
-  updateContactName(event: Event) {
-    this.contactName = (<HTMLInputElement>event.target).value;
+  setContact(contact: Contact) {
+    this.selectedContact = contact;
   }
 
   constructor() { }
