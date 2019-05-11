@@ -10,7 +10,6 @@ export class AppComponent {
   @Input() selectedTab: String = "documents";
 
   switchView(selectedTab: String) {
-    console.log(selectedTab);
     this.selectedTab = selectedTab;
   }
 }
