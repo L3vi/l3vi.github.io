@@ -119,6 +119,14 @@ export const MOCKCONTACTS: Contact[] = [
     imageUrl: '../../assets/images/thompsonda.jpg',
     group: null
   },
+  {
+    id: 19,
+    name: 'Levi Stum',
+    email: 'levistum@gmail.com',
+    phone: "435-851-1720",
+    imageUrl: 'https://avatars0.githubusercontent.com/u/15318252?s=460&v=4',
+    group: null
+  },
 
   // teams
   // index 13
@@ -277,13 +285,5 @@ export const MOCKCONTACTS: Contact[] = [
         group: null
       }
     ]
-  },
-  {
-    id: 19,
-    name: 'Levi Stum',
-    email: 'levistum@gmail.com',
-    phone: "435-851-1720",
-    imageUrl: 'https://avatars0.githubusercontent.com/u/15318252?s=460&v=4',
-    group: null
   }
 ];

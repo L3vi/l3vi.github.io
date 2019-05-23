@@ -8,11 +8,10 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
-  @Output() contactItemSelected = new EventEmitter<Contact>();
   contacts: Contact[] = [];
 
-  onContactSelected(contact: Contact) {
-    this.contactItemSelected.emit(contact);
+  onSelected(contact: Contact) {
+    this.contactService.contactSelectedEvent.emit(contact);
   }
 
   constructor(private contactService: ContactService) { }
