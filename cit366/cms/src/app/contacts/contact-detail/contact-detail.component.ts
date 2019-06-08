@@ -19,9 +19,9 @@ export class ContactDetailComponent implements OnInit {
   constructor(private contactService: ContactService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
     this.activatedRoute.params.subscribe((contact: Contact) => {
-      this.contact = this.contactService.getContact(contact.id);
+      // WHY DO I NEED TO CONVERT CONTACT.ID TO A NUMBER??
+      this.contact = this.contactService.getContact(Number(contact.id));
     });
   }
 

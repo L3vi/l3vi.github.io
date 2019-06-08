@@ -14,7 +14,7 @@ export class MessageService {
     return this.messages.slice();
   }
 
-  getMessage(id: Number): Message {
+  getMessage(id: number): Message {
     let messageFound = this.messages.find(d => d.id === id)
     if (messageFound != undefined) {
       return messageFound;
