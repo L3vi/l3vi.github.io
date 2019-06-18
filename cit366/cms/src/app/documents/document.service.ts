@@ -23,7 +23,8 @@ export class DocumentService {
   }
 
   getDocument(id: number): Document {
-    let documentFound = this.documents.find(document => document.id === id);
+    // WHY DO I NEED TO PARSE THIS TO A NUMBER
+    let documentFound = this.documents.find(document => document.id === Number(id));
     if (documentFound != undefined) {
       return documentFound;
     } else return null;

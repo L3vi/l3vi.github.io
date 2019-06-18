@@ -33,13 +33,14 @@ export class ContactService {
   }
 
   getContact(id: number): Contact {
-    let contactFound: Contact = this.contacts.find((contact) => contact.id === id);
+    // Again, why do I need to translate this id into a number?
+    let contactFound: Contact = this.contacts.find((contact) => contact.id === Number(id));
     if (contactFound === undefined) {
       return null
     } else return contactFound;
   }
 
-  addcontact(newcontact: Contact) {
+  addContact(newcontact: Contact) {
     if (newcontact === null || newcontact === undefined) {
       return;
     }

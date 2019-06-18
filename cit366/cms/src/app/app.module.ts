@@ -21,6 +21,7 @@ import { DocumentViewComponent } from './documents/document-view/document-view.c
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { AppRoutingModule } from './app-routing';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
+import { DndModule } from '../../node_modules/ng2-dnd';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ContactEditComponent } from './contacts/contact-edit/contact-edit.compo
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DndModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

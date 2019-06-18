@@ -3,9 +3,9 @@ export class Document {
     public name: String;
     public description: String;
     public url: String;
-    public children: Document[];
+    public children: any[];
 
-    constructor(id: number, name: String, description: String, url: String, children: Document[]) {
+    constructor(id: number, name: String, url: String, description?: String, children?: Document[]) {
         this.id = id;
         this.name = name;
         this.description = description;
