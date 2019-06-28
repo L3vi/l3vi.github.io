@@ -16,12 +16,16 @@ export class ContactDetailComponent implements OnInit {
     this.router.navigateByUrl('/contacts');
   }
 
+  goToContact(id: number) {
+    // console.log(id);
+    this.router.navigateByUrl(`/contacts/${id}`);
+  }
+
   constructor(private contactService: ContactService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((contact: Contact) => {
-      // WHY DO I NEED TO CONVERT CONTACT.ID TO A NUMBER??
-      this.contact = this.contactService.getContact(Number(contact.id));
+      this.contact = this.contactService.getContact(contact.id);
     });
   }
 

@@ -32,7 +32,9 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((document: Document) => this.document = this.documentService.getDocument(document.id));
+    this.activatedRoute.params.subscribe((document: Document) => {
+      this.document = this.documentService.getDocument(document.id)
+    });
   }
 
 }

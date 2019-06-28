@@ -11,6 +11,11 @@ import { Subscription } from 'rxjs';
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
   subscription: Subscription;
+  term: string = '';
+
+  onKeyPress(value: string) {
+    this.term = value;
+  }
 
   constructor(private contactService: ContactService) {
     this.contacts = this.contactService.getContacts();

@@ -10,6 +10,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./contact-edit.component.css']
 })
 export class ContactEditComponent implements OnInit {
+  originalContact: Contact = null;
   contact: Contact = null;
   contactGroup: Contact[] = [];
   editMode: Boolean = false;
@@ -18,11 +19,10 @@ export class ContactEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     let values = form.value;
-
-    let newContact = new Contact(values.id, values.name, values.email, values.phone, values.imageUrl, values.group);
+    let newContact = new Contact(values.id, values.name, values.email, values.phone, values.imageUrl, this.contactGroup);
 
     if (this.editMode) {
-      this.contactService.updateContact(this.contact, newContact);
+      this.contactService.updateContact(this.originalContact, newContact);
     } else {
       this.contactService.addContact(newContact);
     }
@@ -80,15 +80,15 @@ export class ContactEditComponent implements OnInit {
         return;
       }
 
-      let originalContact = this.contactService.getContact(id);
-      if (!originalContact) {
+      this.originalContact = this.contactService.getContact(id);
+      if (!this.originalContact) {
         return;
       }
 
       this.editMode = true;
-      this.contact = JSON.parse(JSON.stringify(originalContact));
+      this.contact = JSON.parse(JSON.stringify(this.originalContact));
 
-      if (this.contact.group) {
+      if (this.originalContact.group && this.originalContact.group.length > 0) {
         this.contactGroup = this.contact.group.slice();
       }
     })

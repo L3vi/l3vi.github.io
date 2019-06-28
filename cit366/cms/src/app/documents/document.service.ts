@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Document } from './document.model';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +14,33 @@ export class DocumentService {
   documentSelectedEvent = new EventEmitter<Document>();
   documentChangedEvent = new EventEmitter<Document[]>();
 
-  constructor() {
-    this.documents = MOCKDOCUMENTS;
+  constructor(private http: HttpClient) {
+    this.documents = [];
     this.maxDocumentId = this.getMaxId();
   }
 
   getDocuments(): Document[] {
+    this.http.get('https://cit366-46ac1.firebaseio.com/documents.json').subscribe((documents: Document[]) => {
+      this.documents = documents
+      this.maxDocumentId = this.getMaxId()
+      this.documents.sort((documentA, documentB) => {
+        if (documentA.name < documentB.name) {
+          return -1;
+        } else if (documentA.name > documentB.name) {
+          return 1;
+        } else return 0;
+      });
+      this.documentListChangedEvent.next(this.documents.slice());
+    }, (error) => {
+      console.error(error);
+    })
     return this.documents.slice();
   }
 
   getDocument(id: number): Document {
-    // WHY DO I NEED TO PARSE THIS TO A NUMBER
-    let documentFound = this.documents.find(document => document.id === Number(id));
+    // WHY DOES ID COME IN AS A STRING?
+    let documentFound = this.documents.find(document => document.id === id);
+
     if (documentFound != undefined) {
       return documentFound;
     } else return null;
@@ -48,7 +64,7 @@ export class DocumentService {
     this.maxDocumentId++;
     newDocument.id = this.maxDocumentId;
     this.documents.push(newDocument);
-    this.documentListChangedEvent.next(this.documents.slice());
+    this.storeDocuments();
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
@@ -63,7 +79,7 @@ export class DocumentService {
 
     newDocument.id = originalDocument.id;
     this.documents[position] = newDocument;
-    this.documentListChangedEvent.next(this.documents.slice());
+    this.storeDocuments();
   }
 
   deleteDocument(document: Document) {
@@ -77,7 +93,16 @@ export class DocumentService {
     }
 
     this.documents.splice(position, 1);
-    this.documentListChangedEvent.next(this.documents.slice());
+    this.storeDocuments();
+  }
+
+  storeDocuments() {
+    this.http.put('https://cit366-46ac1.firebaseio.com/documents.json',
+      JSON.stringify(this.documents),
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).subscribe(() => {
+      this.documentListChangedEvent.next(this.documents.slice());
+    });
   }
 
 }

@@ -8,13 +8,15 @@ import { ContactService } from 'src/app/contacts/contact.service';
   styleUrls: ['./message-item.component.css']
 })
 export class MessageItemComponent implements OnInit {
-  messageSender: String = "";
+  messageSender: string = "";
   @Input() message: Message
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
-    this.messageSender = this.contactService.getContact(Number(this.message.sender)).name;
+    // setTimeout(() => {
+    this.messageSender = this.contactService.getContact(this.message.sender).name;
+    // }, 1);
   }
 
 }

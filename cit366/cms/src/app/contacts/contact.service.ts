@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class ContactService {
   contactSelectedEvent = new EventEmitter<Contact>();
   contactChangedEvent = new EventEmitter<Contact[]>();
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
+  constructor(private http: HttpClient) {
+    this.contacts = [];
     this.maxContactId = this.getMaxId();
   }
 
@@ -29,12 +30,26 @@ export class ContactService {
   }
 
   getContacts(): Contact[] {
+    this.http.get('https://cit366-46ac1.firebaseio.com/contacts.json').subscribe((contacts: Contact[]) => {
+      this.contacts = contacts
+      this.maxContactId = this.getMaxId()
+      this.contacts.sort((contactA, contactB) => {
+        if (contactA.name < contactB.name) {
+          return -1;
+        } else if (contactA.name > contactB.name) {
+          return 1;
+        } else return 0;
+      });
+      this.contactListChangedEvent.next(this.contacts.slice());
+    }, (error) => {
+      console.error(error);
+    })
     return this.contacts.slice();
   }
 
-  getContact(id: number): Contact {
+  getContact(id): Contact {
     // Again, why do I need to translate this id into a number?
-    let contactFound: Contact = this.contacts.find((contact) => contact.id === Number(id));
+    let contactFound: Contact = this.contacts.find((contact) => contact.id == id);
     if (contactFound === undefined) {
       return null
     } else return contactFound;
@@ -48,7 +63,7 @@ export class ContactService {
     this.maxContactId++;
     newcontact.id = this.maxContactId;
     this.contacts.push(newcontact);
-    this.contactListChangedEvent.next(this.contacts.slice());
+    this.storeContacts();
   }
 
   updateContact(originalContact: Contact, newContact: Contact) {
@@ -63,7 +78,7 @@ export class ContactService {
 
     newContact.id = originalContact.id;
     this.contacts[position] = newContact;
-    this.contactListChangedEvent.next(this.contacts.slice());
+    this.storeContacts();
   }
 
   deleteContact(contact: Contact) {
@@ -77,6 +92,15 @@ export class ContactService {
     }
 
     this.contacts.splice(position, 1);
-    this.contactListChangedEvent.next(this.contacts.slice());
+    this.storeContacts();
+  }
+
+  storeContacts() {
+    this.http.put('https://cit366-46ac1.firebaseio.com/contacts.json',
+      JSON.stringify(this.contacts),
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    ).subscribe(() => {
+      this.contactListChangedEvent.next(this.contacts.slice());
+    });
   }
 }
