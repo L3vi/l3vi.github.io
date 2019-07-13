@@ -9,6 +9,9 @@ var mongoose = require('mongoose');
 
 // import the routing file to handle the default (index) route
 var index = require('./server/routes/app');
+const messageRoutes = require('./server/routes/messages');
+const contactRoutes = require('./server/routes/contacts');
+const documentRoutes = require('./server/routes/documents');
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ... 
 
@@ -32,6 +35,9 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Tell express to map the default route ("/") to the index route
 app.use('/', index);
+app.use('/messages', messageRoutes);
+app.use('/contacts', contactRoutes);
+app.use('/documents', documentRoutes);
 
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
 
