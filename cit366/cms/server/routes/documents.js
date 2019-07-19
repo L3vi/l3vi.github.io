@@ -37,9 +37,9 @@ function deleteDocument(response, document) {
                 error: errƒ
             })
         }
+        getDocuments(null, response);
     })
 
-    getDocuments(null, response);
 }
 
 router.get('/', (req, res, next) => {
