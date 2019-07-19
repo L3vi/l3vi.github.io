@@ -3,6 +3,7 @@ import { Document } from './document.model';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { mapChildrenIntoArray } from '@angular/router/src/url_tree';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class DocumentService {
   }
 
   getDocuments(): Document[] {
-    this.http.get('https://cit366-46ac1.firebaseio.com/documents.json').subscribe((documents: Document[]) => {
-      this.documents = documents
+    this.http.get('http://localhost:3000/documents').subscribe((documents: Document[]) => {
+      this.documents = documents;
       this.maxDocumentId = this.getMaxId()
       this.documents.sort((documentA, documentB) => {
         if (documentA.name < documentB.name) {
@@ -61,10 +62,23 @@ export class DocumentService {
       return;
     }
 
-    this.maxDocumentId++;
-    newDocument.id = this.maxDocumentId;
-    this.documents.push(newDocument);
-    this.storeDocuments();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+
+    newDocument.id = null;
+    const strDocument = JSON.stringify(newDocument);
+
+    this.http.post('http://localhost:3000/documents', strDocument, { headers: headers })
+      .subscribe((documents: Document[]) => {
+        this.documents = documents;
+        this.documentListChangedEvent.next(this.documents.slice());
+      })
+
+    // this.maxDocumentId++;
+    // newDocument.id = this.maxDocumentId;
+    // this.documents.push(newDocument);
+    // this.storeDocuments();
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
@@ -87,13 +101,20 @@ export class DocumentService {
       return;
     }
 
-    const position = this.documents.indexOf(document);
-    if (position < 0) {
-      return;
-    }
+    this.http.delete('http://localhost:3000/documents/' + document.id)
+      // .map((response: Response) => response.json().obj)
+      .subscribe((documents: Document[]) => {
+        this.documents = documents;
+        this.documentListChangedEvent.next(this.documents.slice());
+      });
 
-    this.documents.splice(position, 1);
-    this.storeDocuments();
+    // const position = this.documents.indexOf(document);
+    // if (position < 0) {
+    //   return;
+    // }
+
+    // this.documents.splice(position, 1);
+    // this.storeDocuments();
   }
 
   storeDocuments() {

@@ -18,7 +18,11 @@ export class MessageService {
   }
 
   getMessages(): Message[] {
-    this.http.get('https://cit366-46ac1.firebaseio.com/messages.json').subscribe((messages: Message[]) => {
+    this.http.get('http://localhost:3000/messages/').subscribe((messages: Message[]) => {
+      messages.map(m => {
+        m.sender = m.sender.id;
+        return m;
+      })
       this.messages = messages
       this.maxMessageId = this.getMaxId()
       this.messageChangeEvent.emit(this.messages.slice());

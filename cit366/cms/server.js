@@ -22,9 +22,24 @@ mongoose.connect('mongodb://localhost:27017/cms');
 
 var app = express(); // create an instance of express
 
+var permitCrossDomainRequests = function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    // some browsers send a pre-flight OPTIONS request to check if CORS is enabled so you have to also respond to that
+    if ('OPTIONS' === req.method) {
+        res.sendStatus(200);
+    }
+    else {
+        next();
+    }
+};
+
+
 // Tell express to use the following parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(permitCrossDomainRequests);
 app.use(cookieParser());
 
 app.use(logger('dev')); // Tell express to use the Morgan logger

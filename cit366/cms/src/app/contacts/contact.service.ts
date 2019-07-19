@@ -30,8 +30,8 @@ export class ContactService {
   }
 
   getContacts(): Contact[] {
-    this.http.get('https://cit366-46ac1.firebaseio.com/contacts.json').subscribe((contacts: Contact[]) => {
-      this.contacts = contacts
+    this.http.get('http://localhost:3000/contacts/').subscribe((contacts: Contact[]) => {
+      this.contacts = contacts;
       this.maxContactId = this.getMaxId()
       this.contacts.sort((contactA, contactB) => {
         if (contactA.name < contactB.name) {
@@ -55,15 +55,23 @@ export class ContactService {
     } else return contactFound;
   }
 
-  addContact(newcontact: Contact) {
-    if (newcontact === null || newcontact === undefined) {
+  addContact(newContact: Contact) {
+    if (newContact === null || newContact === undefined) {
       return;
     }
 
-    this.maxContactId++;
-    newcontact.id = this.maxContactId;
-    this.contacts.push(newcontact);
-    this.storeContacts();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+
+    newContact.id = null;
+    const strContact = JSON.stringify(newContact);
+
+    this.http.post('http://localhost:3000/contacts', strContact, { headers: headers })
+      .subscribe((contacts: Contact[]) => {
+        this.contacts = contacts;
+        this.contactListChangedEvent.next(this.contacts.slice());
+      })
   }
 
   updateContact(originalContact: Contact, newContact: Contact) {

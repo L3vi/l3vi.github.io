@@ -11,12 +11,12 @@ export class MessageItemComponent implements OnInit {
   messageSender: string = "";
   @Input() message: Message
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService) {
+    this.contactService.getContacts();
+  }
 
   ngOnInit() {
-    // setTimeout(() => {
     this.messageSender = this.contactService.getContact(this.message.sender).name;
-    // }, 1);
   }
 
 }

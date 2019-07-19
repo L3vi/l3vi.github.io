@@ -1,35 +1,33 @@
 var express = require('express');
-var model = require('./document');
+var model = require('../models/document');
 var router = express.Router();
-var sequenceGenerator = require('../routes/SequenceGenerator');
+var sequenceGenerator = require('./SequenceGenerator');
 
 function getDocuments(request, response) {
     model.find()
-        .exec(err, documents => {
+        .exec((err, documents) => {
             if (err) {
-                response.status(500).json({
+                return response.status(500).json({
                     error: err
                 })
             }
-            return response.status(200).json({
-                document: 'Success',
-                obj: documents
-            })
+            return response.status(200).json(
+                documents
+            )
         })
 }
 
 function saveDocument(response, document) {
-    document.save(err => {
-        response.setHeader('Content-Type', 'application/json');
+    response.setHeader('Content-Type', 'application/json');
+    model.insertMany(document, err => {
         if (err) {
             return response.status(500).json({
                 title: "An error occurred",
                 error: err
             })
         }
+        getDocuments(null, response);
     })
-
-    getDocuments(response);
 }
 
 function deleteDocument(response, document) {
@@ -39,19 +37,19 @@ function deleteDocument(response, document) {
                 error: errƒ
             })
         }
-    }).then({
-        getDocuments();
     })
+
+    getDocuments(null, response);
 }
 
 router.get('/', (req, res, next) => {
-    getDocuments(res);
+    getDocuments(req, res);
 })
 
 router.post('/', (req, res, next) => {
     var maxDocumentId = sequenceGenerator.nextId("documents");
 
-    var document = new Document({
+    var document = new model({
         id: maxDocumentId,
         name: req.body.name,
         description: req.body.description,
@@ -62,7 +60,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.patch('/:id', (req, res, next) => {
-    Document.findOne({ id: req.params.id },
+    model.findOne({ id: req.params.id },
         (err, document) => {
             if (err || !document) {
                 return res.status(500).json({
@@ -82,7 +80,7 @@ router.patch('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
     var query = { id: req.params.id };
 
-    Document.findOne(query,
+    model.findOne(query,
         (err, document) => {
             if (err) {
                 return res.status(500).json({
@@ -100,3 +98,5 @@ router.delete('/:id', (req, res, next) => {
             deleteDocument(res, document);
         });
 });
+
+module.exports = router;

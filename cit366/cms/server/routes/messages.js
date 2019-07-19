@@ -1,20 +1,22 @@
 var express = require('express');
-var model = require('./message');
+var model = require('../models/message');
 var router = express.Router();
-var sequenceGenerator = require('../routes/SequenceGenerator');
+var sequenceGenerator = require('./SequenceGenerator');
 
 function getMessages(request, response) {
     model.find()
-        .exec(err, messages => {
+        .populate('sender')
+        .exec((err, messages) => {
             if (err) {
-                response.status(500).json({
+                return response.status(500).json({
                     error: err
                 })
             }
-            return response.status(200).json({
-                message: 'Success',
-                obj: messages
-            })
+            // messages.forEach(m => {
+            //     console.log(m.sender);
+            // })
+            console.log(messages);
+            return response.status(200).json(messages)
         })
 }
 
@@ -29,7 +31,7 @@ function saveMessage(response, message) {
         }
     })
 
-    getMessages(response);
+    getMessages(null, response);
 }
 
 function deleteMessage(response, message) {
@@ -39,13 +41,13 @@ function deleteMessage(response, message) {
                 error: errƒ
             })
         }
-    }).then({
-        getMessages();
     })
+
+    getMessages(null, response);
 }
 
 router.get('/', (req, res, next) => {
-    getMessage(res);
+    getMessages(req, res);
 })
 
 router.post('/', (req, res, next) => {
@@ -62,7 +64,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.patch('/:id', (req, res, next) => {
-    Message.findOne({ id: req.params.id },
+    model.findOne({ id: req.params.id },
         (err, message) => {
             if (err || !message) {
                 return res.status(500).json({
@@ -82,7 +84,7 @@ router.patch('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
     var query = { id: req.params.id };
 
-    Message.findOne(query,
+    model.findOne(query,
         (err, message) => {
             if (err) {
                 return res.status(500).json({
@@ -100,3 +102,5 @@ router.delete('/:id', (req, res, next) => {
             deleteMessage(res, message);
         });
 });
+
+module.exports = router;
