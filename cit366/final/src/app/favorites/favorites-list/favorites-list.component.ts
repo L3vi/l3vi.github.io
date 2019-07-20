@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Favorite } from '../favorite.model';
+import { FavoritesService } from '../favorites.service';
 
 
 @Component({
@@ -9,25 +10,18 @@ import { Favorite } from '../favorite.model';
 })
 export class FavoritesListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fService: FavoritesService) {
+    this.favorites = this.fService.getFavorites();
+    this.fService.favoriteListChangedEvent.subscribe((favorites: Favorite[]) => {
+      this.favorites = favorites;
+    })
+    this.fService.editModeChanged.subscribe((editMode: boolean) => {
+      this.editMode = editMode
+    });
+  }
 
-  favorites: Favorite[] = [
-    {
-      id: 1,
-      color: "red",
-      word: "Levi"
-    },
-    {
-      id: 2,
-      color: "blue",
-      word: "Cool"
-    },
-    {
-      id: 3,
-      color: "green",
-      word: "Live"
-    }
-  ];
+  favorites: Favorite[] = [];
+  editMode: boolean = false;
 
   ngOnInit() {
   }

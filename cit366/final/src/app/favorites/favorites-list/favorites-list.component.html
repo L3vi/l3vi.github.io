@@ -1,3 +1,15 @@
-<app-favorites-item *ngFor="let favorite of favorites" [favorite]="favorite">
-</app-favorites-item>
+<span [ngSwitch]="editMode">
+    <p *ngSwitchCase="true">
+        <app-favorites-edit *ngFor="let favorite of favorites" [favorite]="favorite">
+        </app-favorites-edit>
+    </p>
+    <p *ngSwitchCase="false">
+        <app-favorites-item *ngFor="let favorite of favorites" [favorite]="favorite">
+        </app-favorites-item>
+    </p>
+    <p *ngSwitchDefault>
+        <app-favorites-item *ngFor="let favorite of favorites" [favorite]="favorite">
+        </app-favorites-item>
+    </p>
+</span>
 <p *ngIf="favorites.length <= 0">Create some favorites and you'll see them listed here!</p>

@@ -1,1 +1,14 @@
-<p>favorites-edit works!</p>
+<div class="card" [style.backgroundColor]="favorite.color">
+    <div class="card-body" style="color:white">
+        <form #f="ngForm" id="contact-edit" (ngSubmit)="onSubmit(f)">
+            Word: <input type="text" #word="ngModel" type="text" name="word" id="word" [ngModel]="favorite?.word"
+                required>
+            <br />
+            Color: <input type="text" #color="ngModel" type="text" name="color" id="color" [ngModel]="favorite?.color"
+                required>
+            <br>
+            <button class="btn btn-success" type="submit" [disabled]="f.invalid">Save</button>
+            <div class="btn btn-danger" (click)="delete(f)">Delete</div>
+        </form>
+    </div>
+</div>
