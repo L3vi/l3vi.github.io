@@ -34,7 +34,7 @@ function deleteDocument(response, document) {
     document.remove(err => {
         if (err) {
             response.status(500).json({
-                error: errƒ
+                error: err
             })
         }
         getDocuments(null, response);
