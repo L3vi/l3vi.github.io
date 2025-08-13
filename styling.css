@@ -1,10 +1,101 @@
+/* Legacy styles for backward compatibility */
 #navList li {
     list-style-type: none;
     padding: 1em;
     background-color: lightblue;
     width: 10em;
+    border-radius: 8px;
+    margin-bottom: 0.5em;
+    transition: all 0.3s ease;
 }
 
 #navList li:hover {
     background-color: lightskyblue;
+    transform: translateX(5px);
+}
+
+/* Modern global styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding-top: 76px; /* Account for fixed navbar */
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom button styles */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Card enhancements */
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Link styles */
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.portfolio-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Focus states for accessibility */
+.btn:focus,
+.nav-link:focus {
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+    outline: none;
+}
+
+/* Dark mode preparation */
+@media (prefers-color-scheme: dark) {
+    /* Future dark mode styles can go here */
 }

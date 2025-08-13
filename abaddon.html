@@ -5,82 +5,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Abaddon</title>
+    <title>Abaddon D&D Spell Tracker | l3vi.github.io</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <style>
     * {
-        font-size: 30px;
+        font-size: 18px;
+    }
+    
+    h2 {
+        font-size: 24px;
+        color: #333;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 5px;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .spell-item {
+        margin-bottom: 0.5rem;
+        padding: 0.25rem;
+        border-radius: 5px;
+        transition: background-color 0.2s;
+    }
+    
+    .spell-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .spell-checkbox {
+        margin-right: 0.5rem;
+        transform: scale(1.2);
+    }
+    
+    .spell-link {
+        text-decoration: none;
+        color: #0066cc;
+        margin-right: 0.5rem;
+    }
+    
+    .spell-link:hover {
+        text-decoration: underline;
+    }
+    
+    .spell-type {
+        font-weight: bold;
+        font-size: 14px;
+        padding: 2px 6px;
+        border-radius: 3px;
+        text-transform: uppercase;
+    }
+    
+    .attack { color: #dc3545; background-color: #f8d7da; }
+    .heal { color: #198754; background-color: #d1e7dd; }
+    .protection { color: #0d6efd; background-color: #cce7ff; }
+    .utility { color: #17a2b8; background-color: #d1ecf1; }
+    .mixed { color: #6f42c1; background-color: #e2d9f3; }
+    
+    .header-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
     }
 </style>
 
 <body>
-    <!-- <table>
-        <tr>
-            <td width="50%"> -->
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1 class="mb-1">
+                                <i class="fas fa-dice-d20 me-2"></i>Abaddon Spell Tracker
+                            </h1>
+                            <p class="mb-0 lead">D&D 5e Cleric Spell Reference & Usage Tracker</p>
+                        </div>
+                        <a href="projects.html" class="btn btn-light">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Projects
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
     <h2>Racial Spells</h2>
-    <input type="checkbox"><a target="_blank" href="http://gdnd.wikidot.com/race:aasimar">Radiant Consumption</a> <span
-        style='color:red'>(attack)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://www.dandwiki.com/wiki/Healing_Touch_(5e_Spell)">Healing
-        Touch</a> <span style='color:green'>(heal)</span><br />
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="http://gdnd.wikidot.com/race:aasimar">Radiant Consumption</a>
+        <span class="spell-type attack">attack</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://www.dandwiki.com/wiki/Healing_Touch_(5e_Spell)">Healing Touch</a>
+        <span class="spell-type heal">heal</span>
+    </div>
+
     <h2>Cantrips</h2>
-
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/sacred_flame/">Sacred
-        Flame</a>
-    <span style='color:red'>(attack)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://www.dnd-spells.com/spell/word-of-radiance">Word of
-        Radiance</a>
-    <span style='color:red'>(attack)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/resistance/">Resistance</a>
-    <span style='color:blue'>(protection)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/light/">Light</a> <span
-        style='color:cyan'>(utility)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/thaumaturgy/">Thaumaturgy</a>
-    <span style='color:cyan'>(utility)</span><br />
-
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/sacred_flame/">Sacred Flame</a>
+        <span class="spell-type attack">attack</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://www.dnd-spells.com/spell/word-of-radiance">Word of Radiance</a>
+        <span class="spell-type attack">attack</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/resistance/">Resistance</a>
+        <span class="spell-type protection">protection</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/light/">Light</a>
+        <span class="spell-type utility">utility</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/thaumaturgy/">Thaumaturgy</a>
+        <span class="spell-type utility">utility</span>
+    </div>
 
     <h2>1st Level Spells</h2>
-
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/guiding_bolt/">Guiding
-        Bolt</a>
-    <span style='color:red'>(attack)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/cure_wounds/">Cure
-        Wounds</a>
-    <span style='color:green'>(heal)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/bless/">Bless</a> <span
-        style='color:blue'>(protection)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/sanctuary/">Sanctuary</a>
-    <span style='color:blue'>(protection)</span><br />
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/guiding_bolt/">Guiding Bolt</a>
+        <span class="spell-type attack">attack</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/cure_wounds/">Cure Wounds</a>
+        <span class="spell-type heal">heal</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/bless/">Bless</a>
+        <span class="spell-type protection">protection</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/sanctuary/">Sanctuary</a>
+        <span class="spell-type protection">protection</span>
+    </div>
 
     <h2>2nd Level Spells</h2>
-
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/spiritual_weapon/">Spiritual
-        Weapon</a> <span style='color:red'>(attack)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/aid/">Aid</a> <span
-        style='color:green'>(heal)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/prayer_of_healing/">Prayer of
-        Healing</a> <span style='color:green'>(heal)</span><br />
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/spiritual_weapon/">Spiritual Weapon</a>
+        <span class="spell-type attack">attack</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/aid/">Aid</a>
+        <span class="spell-type heal">heal</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/prayer_of_healing/">Prayer of Healing</a>
+        <span class="spell-type heal">heal</span>
+    </div>
 
     <h2>3rd Level Spells</h2>
-
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/mass_healing_word/">Mass
-        Healing
-        Word</a> <span style='color:green'>(heal)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/revivify/">Revivify</a>
-    <span style='color:green'>(heal)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/magic_circle/">Magic
-        Circle</a>
-    <span style='color:blue'>(protection)</span><br />
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/mass_healing_word/">Mass Healing Word</a>
+        <span class="spell-type heal">heal</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/revivify/">Revivify</a>
+        <span class="spell-type heal">heal</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/magic_circle/">Magic Circle</a>
+        <span class="spell-type protection">protection</span>
+    </div>
 
     <h2>4th Level Spells</h2>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/guardian_of_faith/">Guardian of Faith</a>
+        <span class="spell-type mixed">attack/protection</span>
+    </div>
+    <div class="spell-item">
+        <input type="checkbox" class="spell-checkbox">
+        <a class="spell-link" target="_blank" href="https://5thsrd.org/spellcasting/spells/divination/">Divination</a>
+        <span class="spell-type utility">utility</span>
+    </div>
 
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/guardian_of_faith/">Guardian
-        of
-        Faith</a> <span style='color:blue'>(attack/protection)</span><br />
-    <input type="checkbox"><a target="_blank" href="https://5thsrd.org/spellcasting/spells/divination/">Divination</a>
-    <span style='color:cyan'>(utility)</span><br />
+            </div>
+        </div>
+    </div>
 
-    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
